@@ -55,7 +55,7 @@ function callCCTest(x, y) {
         };
     };
     var g = 0;
-    return do cont {
+    return cont.run(do cont {
         var sum <- add(x,y);
         var msg <- cont.callCC(function (k) {
             return do cont {
@@ -70,7 +70,7 @@ function callCCTest(x, y) {
         });
         var len <- cont.mreturn(msg.length);
         return [msg, sum, len, g++];
-    };
+    });
 }
 
 exports.foo = foo;
