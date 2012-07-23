@@ -1,0 +1,21 @@
+{
+  "private": true,
+  "name": "monadic",
+  "description": "Do-notation and Monads for JavaScript",
+  "version": "0.0.1",
+  "author": "Matthew Sackman",
+  "main": "index",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/five-eleven/monadic.git"
+  },
+  "dependencies": {
+      "when": ""
+  },
+  "devDependencies": {
+    "pegjs": ""
+  },
+  "scripts": {
+    "pretest": "pegjs --cache lib/javascript_do.pegjs lib/javascript_do.js && pegjs --cache lib/javascript_plain.pegjs lib/javascript_plain.js"
+  }
+}
