@@ -60,15 +60,20 @@ function callCCTest(x, y) {
         sum <- add(x,y);
         msg <- cont.callCC(function (k) {
             return do cont {
+                return console.log('foo');
+                return console.log('bar');
                 if (x === y) {
-                    setTimeout(function () {k('They are equal');}, 1000);
+                    cont.suspend(function (resume) {
+                        setTimeout(function () { resume('They are equal');}, 1000);
+                    });
                 } else if (x > y) {
                     k('x > y');
                 } else {
-                    k('x < y');
+                    return ('x < y');
                 }
             };
         });
+        return console.log('baz',msg);
         len <- return msg.length;
         return [msg, sum, len, g++];
     });
