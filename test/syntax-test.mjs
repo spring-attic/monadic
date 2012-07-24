@@ -1,8 +1,9 @@
 var monad = require('../lib/monad');
 
 function foo () {
-    var a = do monad.list() {
-        var g = 3;
+    var m = monad.list();
+    var a = do m {
+        g = 3;
         x <- ['a', 'b', 'c', 'd'];
         y <- [1, 2];
         return [x, y, g];
@@ -38,11 +39,11 @@ function contTest(x, y, k) {
         };
     };
     return cont.run(do cont {
-        var xx <- square(x);
-        var yy <- square(y);
-        var sum <- add(xx, yy);
-        var sum2 <- add(xx, yy);
-        var sum3 <- add(sum, sum2);
+        xx <- square(x);
+        yy <- square(y);
+        sum <- add(xx, yy);
+        sum2 <- add(xx, yy);
+        sum3 <- add(sum, sum2);
         return sum3;
     }, k);
 }
@@ -56,11 +57,11 @@ function callCCTest(x, y) {
     };
     var g = 0;
     return cont.run(do cont {
-        var sum <- add(x,y);
-        var msg <- cont.callCC(function (k) {
+        sum <- add(x,y);
+        msg <- cont.callCC(function (k) {
             return do cont {
                 if (x === y) {
-                    return setTimeout(function () {k('They are equal');}, 1000);
+                    setTimeout(function () {k('They are equal');}, 1000);
                 } else if (x > y) {
                     k('x > y');
                 } else {
@@ -68,7 +69,7 @@ function callCCTest(x, y) {
                 }
             };
         });
-        var len <- cont.mreturn(msg.length);
+        len <- return msg.length;
         return [msg, sum, len, g++];
     });
 }
