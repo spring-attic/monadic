@@ -84,12 +84,12 @@ function loopTest1() {
     var start;
     var n = 0;
     cont.run(do cont {
-        cont.callCC(function (k) {
-            return do cont { return start = k; };
+        m <- cont.callCC(function (k) {
+            return do cont { return start = k;
+                             return n; };
         });
-        return n++;
-        return console.log('hello world!', n);
-        start();
+        return console.log('hello world!', m);
+        start(m + 1);
     });
 }
 
@@ -98,13 +98,12 @@ function loopTest2() {
     var start;
     var n = 0;
     cont.run(do cont {
-        cont.suspend(function (k) {
+        m <- cont.suspend(function (k) {
             start = k;
             k(n);
         });
-        return n++;
-        return console.log('hello world!', n);
-        start(n);
+        return console.log('hello world!', m);
+        start(m + 1);
     });
 }
 
