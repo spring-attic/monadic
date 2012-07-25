@@ -82,11 +82,10 @@ function callCCTest(x, y) {
 function loopTest1() {
     var cont = monad.contT(monad.identity());
     var start;
-    var n = 0;
     cont.run(do cont {
         m <- cont.callCC(function (k) {
             return do cont { return start = k;
-                             return n; };
+                             return 0; };
         });
         return console.log('hello world!', m);
         start(m + 1);
@@ -96,11 +95,10 @@ function loopTest1() {
 function loopTest2() {
     var cont = monad.contT(monad.identity());
     var start;
-    var n = 0;
     cont.run(do cont {
         m <- cont.suspend(function (k) {
             start = k;
-            k(n);
+            k(0);
         });
         return console.log('hello world!', m);
         start(m + 1);
