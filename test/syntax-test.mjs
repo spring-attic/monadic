@@ -79,7 +79,38 @@ function callCCTest(x, y) {
     });
 }
 
+function loopTest1() {
+    var cont = monad.contT(monad.identity());
+    var start;
+    var n = 0;
+    cont.run(do cont {
+        cont.callCC(function (k) {
+            return do cont { return start = k; };
+        });
+        return n++;
+        return console.log('hello world!', n);
+        start();
+    });
+}
+
+function loopTest2() {
+    var cont = monad.contT(monad.identity());
+    var start;
+    var n = 0;
+    cont.run(do cont {
+        cont.suspend(function (k) {
+            start = k;
+            k(n);
+        });
+        return n++;
+        return console.log('hello world!', n);
+        start(n);
+    });
+}
+
 exports.foo = foo;
 exports.fibMonadic = fibMonadic;
 exports.contTest = contTest;
 exports.callCCTest = callCCTest;
+exports.loopTest1 = loopTest1;
+exports.loopTest2 = loopTest2;
