@@ -1,7 +1,7 @@
 {
   "name": "monadic",
   "description": "Do-notation and Monads for JavaScript",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "author": "Matthew Sackman",
   "main": "index",
   "repository": {

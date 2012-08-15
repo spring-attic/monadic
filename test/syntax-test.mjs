@@ -95,13 +95,17 @@ function loopTest1() {
 function loopTest2() {
     var cont = monad.contT(monad.identity());
     var start;
-    cont.run(do cont {
+    return cont.run(do cont {
         m <- cont.suspend(function (k) {
             start = k;
             k(0);
         });
         return console.log('hello world!', m);
-        start(m + 1);
+        if (m < 10) {
+            return start(m + 1);
+        } else {
+            return m;
+        }
     });
 }
 
