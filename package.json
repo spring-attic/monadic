@@ -16,5 +16,6 @@
   },
   "scripts": {
     "pretest": "pegjs --cache lib/javascript_do.pegjs lib/javascript_do.js && pegjs --cache lib/javascript_plain.pegjs lib/javascript_plain.js"
-  }
+  },
+  "keywords": ["monads","callcc","do-notation"]
 }
